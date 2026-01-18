@@ -10,21 +10,15 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      # 1. Забираем новый код из Гитхаба в папку раннера
+      # 1. Забираем новый код. Робот скачает его в свою папку _work
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Собираем Docker-образ локально (называем его просто notes-app)
-      - name: Build Docker Image
-        run: docker build -t notes-app:latest .
-
-      # 3. Перезапускаем контейнер
-      # Сначала стопаем старый (|| true — чтобы не упало, если контейнера еще нет)
-      - name: Run New Container
+      # 2. Запускаем магию Compose
+      - name: Deploy with Docker Compose
         run: |
-          docker stop notes-app-container || true
-          docker rm notes-app-container || true
-          docker run -d \
-            --name notes-app-container \
-            -p 80:80 \
-            notes-app:latest
+          # --build заставит докер пересобрать образ, если код изменился
+          # -d запустит всё в фоновом режиме
+          docker compose up -d --build
+      - name: Cleanup old images
+        run: docker image prune -f
