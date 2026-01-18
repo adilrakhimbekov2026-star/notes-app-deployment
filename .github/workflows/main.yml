@@ -19,6 +19,6 @@ jobs:
         run: |
           # --build заставит докер пересобрать образ, если код изменился
           # -d запустит всё в фоновом режиме
-          docker compose up -d --build
+          docker-compose up -d --build
       - name: Cleanup old images
         run: docker image prune -f
