@@ -8,8 +8,6 @@ services:
   backend:
     build: ./backend
     container_name: backend_container
-    extra_hosts:
-      - "localhost:host-gateway" 
     depends_on:
       - db
 
@@ -17,6 +15,6 @@ services:
     build: ./frontend
     container_name: frontend_container
     ports:
-      - "80:80"
+      - "80:80" # nginx on frontend service
     depends_on:
       - backend

@@ -54,7 +54,7 @@ function App() {
         <>
             <div className="container">
                 <header className="head">
-                    <h1 className="scribbleдopjioh">Scribble</h1>
+                    <h1 className="scribble">Scribble</h1>
                     <button className="addItem" onClick={togglePopup}>
                         create
                     </button>

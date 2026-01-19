@@ -6,15 +6,12 @@ on:
 
 jobs:
   deploy-locally:
-    # ГЛАВНОЕ: указываем, что работаем у себя дома
     runs-on: self-hosted
 
     steps:
-      # 1. Забираем новый код. Робот скачает его в свою папку _work
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Запускаем магию Compose
       - name: Deploy with Docker Compose
         run: |
           # --build заставит докер пересобрать образ, если код изменился
